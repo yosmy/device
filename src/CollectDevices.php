@@ -5,32 +5,32 @@ namespace Yosmy;
 /**
  * @di\service()
  */
-class CollectSessions
+class CollectDevices
 {
     /**
-     * @var ManageSessionCollection
+     * @var ManageDeviceCollection
      */
     private $manageCollection;
 
     /**
-     * @param ManageSessionCollection $manageCollection
+     * @param ManageDeviceCollection $manageCollection
      */
     public function __construct(
-        ManageSessionCollection $manageCollection
+        ManageDeviceCollection $manageCollection
     ) {
         $this->manageCollection = $manageCollection;
     }
 
     /**
-     * @param string[] $ids
-     * @param array    $data
+     * @param string[]   $ids
+     * @param array|null $data
      *
-     * @return Sessions
+     * @return Devices
      */
     public function collect(
         ?array $ids,
         ?array $data
-    ) {
+    ): Devices {
         $criteria = [];
 
         if ($ids !== null) {
@@ -46,6 +46,6 @@ class CollectSessions
 
         $cursor = $this->manageCollection->find($criteria);
 
-        return new Sessions($cursor);
+        return new Devices($cursor);
     }
 }

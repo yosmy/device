@@ -5,35 +5,32 @@ namespace Yosmy;
 /**
  * @di\service()
  */
-class AddSession
+class AddDevice
 {
     /**
-     * @var ManageSessionCollection
+     * @var ManageDeviceCollection
      */
     private $manageCollection;
 
     /**
-     * @param ManageSessionCollection $manageCollection
+     * @param ManageDeviceCollection $manageCollection
      */
     public function __construct(
-        ManageSessionCollection $manageCollection
+        ManageDeviceCollection $manageCollection
     ) {
         $this->manageCollection = $manageCollection;
     }
 
     /**
-     * @param array $data
-     *
      * @return string
      */
-    public function add(
-        array $data
-    ) {
+    public function add(): string
+    {
         $id = uniqid();
 
         $this->manageCollection->insertOne([
             '_id' => $id,
-            'data' => $data
+            'data' => []
         ]);
 
         return $id;
